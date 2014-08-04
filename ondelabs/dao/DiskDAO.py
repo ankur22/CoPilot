@@ -11,12 +11,16 @@ class DiskDAO(BaseDAO):
     def __init__(self, filename):
         self.__filename = filename
     
-    def loadData(self):
-        raise NotImplementedError( "Should implemented this" )
-    
     def _getLinesFromFile(self):
         f = open(self.__filename)
         lines = f.readlines()
         f.close()
         return lines
+    
+    def _isInt(self, text):
+        try:
+            int(text)
+            return True
+        except ValueError:
+            return False
     

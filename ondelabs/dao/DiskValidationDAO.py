@@ -33,15 +33,8 @@ class DiskValidationDAO(DiskDAO):
             logging.warn('Could not find valid class type in ' + line)
             return None
         else:
-            if self.__isInt(line[index:]) is False:
+            if self._isInt(line[index:]) is False:
                 logging.warn('classType is not an int')
                 return None
             else:
                 return TextClassType(line[:index], int(line[index:]))
-
-    def __isInt(self, text):
-        try:
-            int(text)
-            return True
-        except ValueError:
-            return False

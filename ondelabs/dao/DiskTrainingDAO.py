@@ -28,7 +28,7 @@ class DiskTrainingDAO(DiskDAO):
             textClassType = self.__separateTextAndClassType(line)
             if textClassType is not None:
                 classType = textClassType.getClassType()
-                if self.__isInt(classType) is False:
+                if self._isInt(classType) is False:
                     logging.warn('classType is not an int')
                     continue
                 classType = int(classType)
@@ -45,11 +45,4 @@ class DiskTrainingDAO(DiskDAO):
             return None
         else:
             return TextClassType(line[:index], line[index:])
-
-    def __isInt(self, text):
-        try:
-            int(text)
-            return True
-        except ValueError:
-            return False
     
