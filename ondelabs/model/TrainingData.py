@@ -3,6 +3,9 @@ Created on 3 Aug 2014
 
 @author: ankur
 '''
+import pickle
+import os.path
+
 
 class TrainingData:
     
@@ -20,4 +23,15 @@ class TrainingData:
     
     def getLexicon(self):
         return self.__lexicon
-        
+    
+    def serialize(self):
+        pickleFile = file("resource/model.pik", "w")
+        pickle.dump(self, pickleFile, 1)
+    
+    @staticmethod
+    def deserialize():
+        if os.path.isfile("resource/model.pik"):
+            pickleFile = file("resource/model.pik", "r")
+            return pickle.load(pickleFile)
+        return None
+    

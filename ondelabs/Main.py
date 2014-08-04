@@ -12,18 +12,23 @@ import logging
 
 from ondelabs.dao.DiskTrainingDAO import DiskTrainingDAO
 from ondelabs.dao.DiskValidationDAO import DiskValidationDAO
+from ondelabs.model.TrainingData import TrainingData
 
 
 def main():
-    trainingDAO = DiskTrainingDAO('resource/training.txt')
-    trainingData = trainingDAO.loadData()
-    trainingData.train()
+    trainingData = TrainingData.deserialize()
+    
+    if trainingData is None:
+        trainingDAO = DiskTrainingDAO('resource/training.txt')
+        trainingData = trainingDAO.loadData()
+        trainingData.train()
+        trainingData.serialize()
     
     logging.info('Training has completed')
     
     validationDAO = DiskValidationDAO('resource/validation.txt')
     validationData = validationDAO.loadData()
-    result = validationData.validate(trainingData.getClasses(), trainingData.getLexicon())
+    validationResult = validationData.validate(trainingData.getClasses(), trainingData.getLexicon())
     
     logging.info('Validation has completed')
     

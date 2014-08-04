@@ -10,6 +10,7 @@ class ClassType:
         self.__classType = classType
         self.__totalOccurrence = 0
         self.__totalWordCount = 0
+        self.__prior = 0
         self.incrementOccurrence(wordCount)
     
     def incrementOccurrence(self, wordCount):
@@ -24,4 +25,10 @@ class ClassType:
     
     def getTotalOccurrence(self):
         return self.__totalOccurrence
+    
+    def getPrior(self):
+        return self.__prior
+    
+    def setPrior(self, prior):
+        self.__prior = prior
     

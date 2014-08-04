@@ -10,7 +10,6 @@ class Classes:
     
     def __init__(self):
         self.__classes = {}
-        self.__prior = {}
         self.__totalNonUniqueClasses = 0
     
     def addClass(self, classType, wordCount):        
@@ -24,8 +23,8 @@ class Classes:
         return True
         
     def calculatePrior(self):
-        for classType in self.__classes:
-            self.__prior[classType] = float(self.__classes[classType].getTotalOccurrence()) / float(self.__totalNonUniqueClasses)
+        for classType in self.__classes.values():
+            classType.setPrior(float(classType.getTotalOccurrence()) / float(self.__totalNonUniqueClasses))
     
     def getAllClassTypes(self):
         return self.__classes.keys()

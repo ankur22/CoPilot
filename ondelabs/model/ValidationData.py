@@ -3,25 +3,19 @@ Created on 3 Aug 2014
 
 @author: ankur
 '''
-import logging
 import math
 
 from ondelabs.model.TextClassType import TextClassType
+from ondelabs.model.ValidationResult import ValidationResult
 
 
 class ValidationData:
     
     def __init__(self, lines):
-        self.__lines = lines
-        self.__words = {}
-        self.__separateWordsInLines()
-    
-    def __separateWordsInLines(self):
-        for line in self.__lines:
-            self.__words[line] = TextClassType(line, -1)
+        self.__words = lines
     
     def validate(self, classes, lexicon):
-        results = {}
+        validationResult = ValidationResult()
         
         allClassTypes = classes.getAllClassTypes()
         
@@ -31,14 +25,16 @@ class ValidationData:
             for classTypeKey in allClassTypes:
                 classType = classes.getClass(classTypeKey)
                 words = validationText.getWords()
-                prob = math.log(classes.getPrior(classTypeKey))
+                prob = math.log(classType.getPrior())
                 for word in words:
                     conProb = lexicon.getConditionalProbability(word, classTypeKey)
                     if conProb != 0:
                         prob = prob + math.log(conProb)
                 classResult[classTypeKey] = prob
-            results[key] = self.__findClassTypeWithHighestProb(classResult)
-        return results
+            prediction = self.__findClassTypeWithHighestProb(classResult)
+            validationResult.addPrediction(key, prediction, validationText.getClassType())
+        validationResult.calculateAccuracy()
+        return validationResult
     
     def __findClassTypeWithHighestProb(self, probs):
         bestClassType = -1
