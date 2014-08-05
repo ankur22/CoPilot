@@ -46,5 +46,8 @@ class ValidationData:
                 bestClassType = key
         
         return bestClassType
+
+    def getTotalValidationTestDataPoints(self):
+        return len(self.__words)
         
         

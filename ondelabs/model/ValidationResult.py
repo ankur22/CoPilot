@@ -26,4 +26,10 @@ class ValidationResult:
                 correctPredictionCount = correctPredictionCount + 1
         
         self.__accuracy = (float(correctPredictionCount) / float(self.__totalPredictions)) * 100
+
+    def getAccuracy(self):
+        return self.__accuracy
+
+    def getTotalPredictions(self):
+        return self.__totalPredictions
     
