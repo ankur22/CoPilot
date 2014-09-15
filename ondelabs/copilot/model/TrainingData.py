@@ -25,13 +25,17 @@ class TrainingData:
         return self.__lexicon
     
     def serialize(self):
-        pickleFile = file("resource/model.pik", "w")
+        currentDir = os.path.dirname(os.path.realpath(__file__))
+        resource_path = os.path.join(currentDir, "../../../resource/model.pik")
+        pickleFile = file(resource_path, "w")
         pickle.dump(self, pickleFile, 1)
     
     @staticmethod
     def deserialize():
-        if os.path.isfile("resource/model.pik"):
-            pickleFile = file("resource/model.pik", "r")
+        currentDir = os.path.dirname(os.path.realpath(__file__))
+        resource_path = os.path.join(currentDir, "../../../resource/model.pik")
+        if os.path.isfile(resource_path):
+            pickleFile = file(resource_path, "r")
             return pickle.load(pickleFile)
         return None
     
