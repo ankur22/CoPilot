@@ -17,8 +17,8 @@ class TestData:
 
         allClassTypes = classes.getAllClassTypes()
 
-        for key in self.__words.keys():
-            validationText = self.__words[key]
+        for testLine in self.__words:
+            validationText = testLine.getTextClassType()
             classResult = {}
             for classTypeKey in allClassTypes:
                 classType = classes.getClass(classTypeKey)
@@ -30,7 +30,7 @@ class TestData:
                         prob = prob + math.log(conProb)
                 classResult[classTypeKey] = prob
             prediction = self.__findClassTypeWithHighestProb(classResult)
-            testResult.addPrediction(key, prediction)
+            testResult.addPrediction(testLine.getOriginalLine(), prediction)
         return testResult
 
     def __findClassTypeWithHighestProb(self, probs):

@@ -9,6 +9,7 @@ import logging
 from ondelabs.copilot.dao.DiskDAO import DiskDAO
 from ondelabs.copilot.model.TestData import TestData
 from ondelabs.copilot.model.Text import Text
+from ondelabs.copilot.model.TestLine import TestLine
 
 
 class DiskTestDAO(DiskDAO):
@@ -17,13 +18,13 @@ class DiskTestDAO(DiskDAO):
         super(DiskTestDAO, self).__init__(filename)
     
     def loadData(self):
-        result = {}
+        result = []
         lines = self._getLinesFromFile()
 
         for line in lines:
             textClassType = self.__separateText(line)
             if textClassType is not None:
-                result[line] = textClassType
+                result.append(TestLine(line, textClassType))
         
         return TestData(result)
     
