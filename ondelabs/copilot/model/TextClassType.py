@@ -16,17 +16,18 @@ class TextClassType:
         textOnlyExtractWords = []
         
         for word in extractedText:
-            if self.__isNumber(word) is False:
-                textOnlyExtractWords.append(word)
+            # if self.__isNumber(word) is False:
+            #     textOnlyExtractWords.append(word)
+            textOnlyExtractWords.append(word)
                 
         return textOnlyExtractWords
     
-    def __isNumber(self, text):
-        try:
-            float(text)
-            return True
-        except ValueError:
-            return False
+    # def __isNumber(self, text):
+    #     try:
+    #         float(text)
+    #         return True
+    #     except ValueError:
+    #         return False
     
     def getWords(self):
         return self.__separatedWords

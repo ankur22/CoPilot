@@ -14,6 +14,7 @@ class ValidationData:
         self.__words = lines
     
     def validate(self, classes, lexicon):
+        print 'Validation started. Results:'
         validationResult = ValidationResult()
         
         allClassTypes = classes.getAllClassTypes()
@@ -33,6 +34,7 @@ class ValidationData:
             prediction = self.__findClassTypeWithHighestProb(classResult)
             validationResult.addPrediction(key, prediction, validationText.getClassType())
         validationResult.calculateAccuracy()
+        print 'Validation Finished. Hopefully you have 100%.'
         return validationResult
     
     def __findClassTypeWithHighestProb(self, probs):

@@ -14,6 +14,7 @@ class ValidationResult:
         self.__accuracy = 0
     
     def addPrediction(self, key, prediction, actual):
+        print key + ' | Prediction = ' + str(prediction) + ' | Actual = ' + str(actual)
         self.__predictionResult.append(ValidationPrediction(key, prediction, actual))
         self.__totalPredictions = self.__totalPredictions + 1
         self.__accuracy
